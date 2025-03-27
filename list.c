@@ -97,6 +97,7 @@ void pushCurrent(List * list, void * data) {
     if (list->current->prev != NULL){
         list->current->prev->next = new_node;   // Enlazamos en caso de que haya un nodo anterior
     }
+    list->current->prev = new_node;
 }
 
 void * popFront(List * list) {

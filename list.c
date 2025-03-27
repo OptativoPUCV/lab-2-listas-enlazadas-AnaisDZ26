@@ -50,7 +50,14 @@ void * nextList(List * list) {
 }
 
 void * lastList(List * list) {
-    return NULL;
+    if (list->tail == NULL) return NULL;
+    while (list->tail != NULL){
+        if (list->tail->next == NULL){
+            list->current = list->tail;
+        }
+        list->tail = list->tail->next;
+    }
+    return list->current->data;
 }
 
 void * prevList(List * list) {

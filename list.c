@@ -111,9 +111,9 @@ void * popCurrent(List * list) {
     void* dato = aux->data;
     // Caso 1: Que el current sea el unico dato en la lista
     if (list->head == aux && list->tail == aux){
-        list->current = NULL;
         list->head = NULL;
         list->tail = NULL;
+        list->current = NULL;
     // Caso 2: Que el current sea el ultimo dato de la lista
     } else if (list->tail == aux){
         list->tail = aux;
@@ -123,11 +123,11 @@ void * popCurrent(List * list) {
     } else if (list->head == aux){
         list->head = aux;
         list->head->prev = NULL;
-        list->current = list->head;
+        list->current = list->head; // Avanza al siguente
     // Caso 4: Que el current este entre dos nodos
     } else {
-        aux->prev->next = aux->next;
-        aux->next->prev = aux->prev;
+        aux->prev->next = aux->next;    // Enlazamos
+        aux->next->prev = aux->prev;    // Enlazamos
         list->current = aux->next;  // Avanza a la siguente posicion
     }
     free(aux);

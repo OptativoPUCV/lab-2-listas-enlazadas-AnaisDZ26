@@ -123,7 +123,7 @@ void * popCurrent(List * list) {
     } else if (list->head == aux){
         list->head = aux;
         list->head->prev = NULL;
-        list->current = list->head->next;
+        list->current = list->head;
     // Caso 4: Que el current este entre dos nodos
     } else {
         aux->prev->next = aux->next;

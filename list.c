@@ -116,12 +116,12 @@ void * popCurrent(List * list) {
         list->current = NULL;
     // Caso 2: Que el current sea el ultimo dato de la lista
     } else if (list->tail == aux){
-        list->tail = aux;
+        list->tail = aux->prev;
         list->tail->next = NULL;
-        list->current = NULL;
+        list->current = list->tail;
     // Caso 3: Que el current sea el primer dato de la lista
     } else if (list->head == aux){
-        list->head = aux;
+        list->head = aux->next;
         list->head->prev = NULL;
         list->current = list->head; // Avanza al siguente
     // Caso 4: Que el current este entre dos nodos

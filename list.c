@@ -91,7 +91,7 @@ void pushCurrent(List * list, void * data) {
     if (list->current->next != NULL){
         list->current->next->prev = new_node;  // current <- new <-> next
     } else {
-        list->tail = new_node;  // current <- new
+        list->tail = new_node;  // current <- new (tail)
     }
     list->current->next = new_node; // current <-> new // current <-> new <-> next
 }
@@ -107,7 +107,31 @@ void * popBack(List * list) {
 }
 
 void * popCurrent(List * list) {
-    return NULL;
+    Node* aux = list->current;
+    void* dato = aux->data;
+    // Caso 1: Que el current sea el unico dato en la lista
+    if (list->head == aux && list->tail == aux){
+        list->current = NULL;
+        list->head = NULL;
+        list->tail = NULL;
+    // Caso 2: Que el current sea el ultimo dato de la lista
+    } else if (list->tail == aux){
+        list->tail = aux;
+        list->tail->next = NULL;
+        list->current = NULL;
+    // Caso 3: Que el current sea el primer dato de la lista
+    } else if (list->head == aux){
+        list->head = aux;
+        list->head->prev = NULL;
+        list->current = list->head->next;
+    // Caso 4: Que el current este entre dos nodos
+    } else {
+        aux->prev->next = aux->next;
+        aux->next->prev = aux->prev;
+        list->current = aux->next;  // Avanza a la siguente posicion
+    }
+    free(aux);
+    return dato;
 }
 
 void cleanList(List * list) {
